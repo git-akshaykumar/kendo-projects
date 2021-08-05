@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <!-- chart 1 -->
+    <div class="col-12 border p-2">
+      <button (click)="exportChart()" kendoButton [primary]="true">
+        Export Chart
+      </button>
+      <kendo-chart [categoryAxis]="{ categories: student_category }">
+        <kendo-chart-title
+          text="Students Marks"
+          position="bottom"
+        ></kendo-chart-title>
+        <kendo-chart-series>
+          <kendo-chart-series-item
+            *ngFor="let st of student"
+            type="line"
+            [data]="st.data"
+            [name]="st.name"
+          ></kendo-chart-series-item>
+          <kendo-chart-legend
+            position="custom"
+            [offsetX]="1000"
+            [offsetY]="50"
+            orientation="vertical"
+          ></kendo-chart-legend>
+          <kendo-chart-tooltip format="{0} marks"></kendo-chart-tooltip>
+        </kendo-chart-series>
+      </kendo-chart>
+    </div>
+
+    <!-- chart 2 -->
+    <div class="col-12 border p-2">
+      <button kendoButton [primary]="true" (click)="toggleSeries()">
+        Toggle second series
+      </button>
+      <kendo-chart
+        #export
+        renderAs="svg"
+        [transitions]="true"
+        [categoryAxis]="{ categories: ['A', 'B', 'C', 'D'] }"
+      >
+        <kendo-chart-series>
+          <kendo-chart-series-item [data]="[1, 2, 3, 5]">
+          </kendo-chart-series-item>
+
+          <kendo-chart-series-item [data]="[5, 7, 3, 8]" *ngIf="showSeries">
+          </kendo-chart-series-item>
+        </kendo-chart-series>
+      </kendo-chart>
+    </div>
+  </div>
+</div>
+
+<!-- type of chart: bar plot default -->

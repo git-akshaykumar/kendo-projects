@@ -1,0 +1,26 @@
+<div class="d-flex justify-content-center my-2">
+  <kendo-buttongroup>
+    <button
+      kendoButton
+      [toggleable]="true"
+      class="btn"
+      *ngFor="let tbno of tablescols; let i = index"
+      (click)="displayTable(i)"
+    >
+      Table{{ i + 1 }}
+    </button>
+  </kendo-buttongroup>
+</div>
+
+<div class="container-fluid m-0">
+  <ng-container *ngFor="let view of tablescols; let i = index">
+    <div class="row d-flex justify-content-center my-5" *ngIf="showTable[i]">
+      <div class="col-12 col-sm-10">
+        <h1>Table {{ i + 1 }}</h1>
+        <app-contact-detail [cols]="view" [tableno]="i"></app-contact-detail>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<router-outlet></router-outlet>

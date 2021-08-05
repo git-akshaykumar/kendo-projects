@@ -1,0 +1,69 @@
+<kendo-grid
+  [kendoGridBinding]="viewData"
+  [pageSize]="5"
+  [pageable]="true"
+  [sortable]="true"
+  [groupable]="true"
+  [reorderable]="true"
+  [resizable]="true"
+  [columnMenu]="{ columnChooser: false, filter: true }"
+  [loading]="loading"
+  (edit)="editHandler($event)"
+  (cancel)="cancelHandler($event)"
+  (save)="saveHandler($event)"
+  (remove)="removeHandler($event)"
+  (add)="addHandler($event)"
+>
+  <ng-template kendoGridToolbarTemplate>
+    <input
+      placeholder="Search in all columns"
+      kendoTextBox
+      (input)="search($event)"
+    />
+    <kendo-grid-spacer></kendo-grid-spacer>
+    <button [primary]="true" kendoGridAddCommand>Add new</button>
+  </ng-template>
+
+  <ng-container *ngFor="let col of cols">
+    <kendo-grid-column [field]="col" [title]="col"> </kendo-grid-column>
+  </ng-container>
+
+  <ng-container *ngIf="cols && cols.length > 0">
+    <kendo-grid-column title="edit" [columnMenu]="false" [width]="60">
+      <ng-template kendoGridCellTemplate let-isNew="isNew">
+        <button
+          [primary]="true"
+          kendoGridEditCommand
+          icon="edit"
+          look="flat"
+          title="edit"
+        ></button>
+        <button
+          kendoGridSaveCommand
+          [primary]="true"
+          icon="check"
+          look="flat"
+          title="update"
+        ></button>
+        <button
+          [primary]="true"
+          kendoGridCancelCommand
+          look="flat"
+          title="undo"
+          icon="undo"
+        ></button>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column title="Del" [columnMenu]="false" [width]="60">
+      <ng-template kendoGridCellTemplate let-cellval>
+        <button
+          [primary]="true"
+          kendoGridRemoveCommand
+          icon="delete"
+          title="delete"
+          look="flat"
+        ></button>
+      </ng-template>
+    </kendo-grid-column>
+  </ng-container>
+</kendo-grid>

@@ -1,0 +1,11 @@
+<p>testing works!</p>
+
+<button class="btn btn-primary" (click)="getData()">Get Data</button>
+<button class="btn btn-primary" (click)="postData()">post Data</button>
+<button class="btn btn-primary" (click)="putData()">put Data</button>
+<div *ngFor="let col of data; let i = index">
+  {{ col.id + " " + col.title + " " + col.author }}
+  <button class="btn btn-primary m-3" (click)="deleteData(col.id)">
+    delete Data
+  </button>
+</div>
